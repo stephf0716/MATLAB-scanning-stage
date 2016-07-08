@@ -79,10 +79,10 @@ function z_pos_new_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 global newmark_controller
-user_input = get(handles.input_distance, 'String');
-user_input = int2str(round(str2num(user_input)*2519.685));
-fprintf(newmark_controller, '%s', ['PR 0,0,' user_input ';BG;']);
-disp(['PR 0,0' user_input ';BG;'])
+user_input = get(handles.input_distance,'String');
+user_input = int2str(round(str2double(user_input))); 
+fprintf(newmark_controller, ['AY;MR-' user_input ';GO;']); 
+disp(['AX;MR' user_input])
 
 % --- Executes on button press in z_neg_new.
 function z_neg_new_Callback(hObject, eventdata, handles)
@@ -91,9 +91,9 @@ function z_neg_new_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 global newmark_controller;
 user_input = get(handles.input_distance,'String');
-user_input = int2str(round(str2num(user_input)*2519.685));
-fprintf(newmark_controller,'%s', ['PR 0,0,-' user_input ';BG;']);
-disp(['PR 0,0,-' user_input ';BG;'])
+user_input = int2str(round(str2double(user_input)));
+fprintf(newmark_controller, ['AY;MR' user_input ';GO;']);
+disp(['AX;MR-' user_input])
 
 % --- Executes on button press in x_pos_new.
 function x_pos_new_Callback(hObject, eventdata, handles)
@@ -102,9 +102,9 @@ function x_pos_new_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 global newmark_controller;
 user_input = get(handles.input_distance,'String');
-user_input = int2str(round(str2num(user_input)*2519.685));
-fprintf(newmark_controller,'%s', ['PR ' user_input ',0,0;BG;']);
-disp(['PR ' user_input ',0,0;BG;'])
+user_input = int2str(round(str2double(user_input)));
+fprintf(newmark_controller, ['AX;MR' user_input ';GO;']);
+disp(['AX;MR' user_input])
 
 
 % --- Executes on button press in x_neg_new.
@@ -114,9 +114,9 @@ function x_neg_new_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 global newmark_controller;
 user_input = get(handles.input_distance,'String');
-user_input = int2str(round(str2num(user_input)*2519.685));
-fprintf(newmark_controller,'%s', ['PR -' user_input ',0,0;BG;']);
-disp(['PR -' user_input ',0,0;BG;'])
+user_input = int2str(round(str2double(user_input)));
+fprintf(newmark_controller, ['AX;MR-' user_input ';GO;']);
+disp(['AX;MR-' user_input])
 
 % --- Executes on button press in connect_to_controller.
 function connect_to_controller_Callback(hObject, eventdata, handles)
@@ -130,7 +130,7 @@ if isvalid(newmark_controller)
     fclose(newmark_controller)
     fopen(newmark_controller);
     display('Newmark Controller Connected')
-    set(handles.disconnect_controller, 'Enable','on')
+    set(handles.disconnect_from_controller, 'Enable','on')
     set(handles.connect_to_controller,'Enable','off')
 else
     warndlg('Serial port is not valid')
@@ -145,7 +145,7 @@ function disconnect_from_controller_Callback(hObject, eventdata, handles)
 global newmark_controller; 
 fclose(newmark_controller);
 display('Newmark Controller Disconnected');
-set (handles.disconnect_controller,'Enable','off')
+set (handles.disconnect_from_controller,'Enable','off')
 set(handles.connect_to_controller,'Enable','on')
 
 
@@ -155,7 +155,7 @@ function input_distance_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 input_distance = str2double(get(hObject,'String'));
-if isnan(movement) || ~isreal(movement)
+if isnan(input_distance) || ~isreal(input_distance)
     set(handles.z_pos_new,'Enable','off')
     set(handles.z_neg_new,'Enable','off')
     set(handles.x_pos_new,'Enable','off')
