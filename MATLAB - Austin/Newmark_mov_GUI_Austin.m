@@ -78,20 +78,33 @@ function z_pos_new_Callback(hObject, eventdata, handles)
 % hObject    handle to z_pos_new (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-
+global newmark_controller
+user_input = get(handles.input_distance,'String');
+user_input = int2str(round(str2double(user_input))); 
+fprintf(newmark_controller, ['AY;MR-' user_input ';GO;']); 
+disp(['AX;MR' user_input])
 
 % --- Executes on button press in z_neg_new.
 function z_neg_new_Callback(hObject, eventdata, handles)
 % hObject    handle to z_neg_new (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-
+global newmark_controller;
+user_input = get(handles.input_distance,'String');
+user_input = int2str(round(str2double(user_input)));
+fprintf(newmark_controller, ['AY;MR' user_input ';GO;']);
+disp(['AX;MR-' user_input])
 
 % --- Executes on button press in x_pos_new.
 function x_pos_new_Callback(hObject, eventdata, handles)
 % hObject    handle to x_pos_new (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+global newmark_controller;
+user_input = get(handles.input_distance,'String');
+user_input = int2str(round(str2double(user_input)));
+fprintf(newmark_controller, ['AX;MR' user_input ';GO;']);
+disp(['AX;MR' user_input])
 
 
 % --- Executes on button press in x_neg_new.
@@ -99,13 +112,29 @@ function x_neg_new_Callback(hObject, eventdata, handles)
 % hObject    handle to x_neg_new (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-
+global newmark_controller;
+user_input = get(handles.input_distance,'String');
+user_input = int2str(round(str2double(user_input)));
+fprintf(newmark_controller, ['AX;MR-' user_input ';GO;']);
+disp(['AX;MR-' user_input])
 
 % --- Executes on button press in connect_to_controller.
 function connect_to_controller_Callback(hObject, eventdata, handles)
 % hObject    handle to connect_to_controller (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+global newmark_controller
+com_port = 'COM6';
+newmark_controller = serial(com_port, 'BaudRate',9600);
+if isvalid(newmark_controller)
+    fclose(newmark_controller)
+    fopen(newmark_controller);
+    display('Newmark Controller Connected')
+    set(handles.disconnect_from_controller, 'Enable','on')
+    set(handles.connect_to_controller,'Enable','off')
+else
+    warndlg('Serial port is not valid')
+end
 
 
 % --- Executes on button press in disconnect_from_controller.
@@ -113,6 +142,11 @@ function disconnect_from_controller_Callback(hObject, eventdata, handles)
 % hObject    handle to disconnect_from_controller (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+global newmark_controller; 
+fclose(newmark_controller);
+display('Newmark Controller Disconnected');
+set (handles.disconnect_from_controller,'Enable','off')
+set(handles.connect_to_controller,'Enable','on')
 
 
 
@@ -120,6 +154,21 @@ function input_distance_Callback(hObject, eventdata, handles)
 % hObject    handle to input_distance (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+input_distance = str2double(get(hObject,'String'));
+if isnan(input_distance) || ~isreal(input_distance)
+    set(handles.z_pos_new,'Enable','off')
+    set(handles.z_neg_new,'Enable','off')
+    set(handles.x_pos_new,'Enable','off')
+    set(handles.x_neg_new,'Enable','off')
+    uicontrol(hObject)
+else
+    set(handles.z_pos_new,'Enable','on')
+    set(handles.z_neg_new,'Enable','on')
+    set(handles.x_pos_new,'Enable','on')
+    set(handles.x_neg_new,'Enable','on')
+end
+
+
 
 % Hints: get(hObject,'String') returns contents of input_distance as text
 %        str2double(get(hObject,'String')) returns contents of input_distance as a double
