@@ -79,6 +79,8 @@ function z_pos_new_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 global newmark_controller
+fprintf(newmark_controller, 'AY;UF;');
+fprintf(newmark_controller, 'AY;UU25;');
 user_input = get(handles.input_distance,'String');
 user_input = int2str(round(str2double(user_input))); 
 fprintf(newmark_controller, ['AY;MR-' user_input ';GO;']); 
@@ -90,6 +92,8 @@ function z_neg_new_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 global newmark_controller;
+fprintf(newmark_controller, 'AY;UF;');
+fprintf(newmark_controller, 'AY;UU25;');
 user_input = get(handles.input_distance,'String');
 user_input = int2str(round(str2double(user_input)));
 fprintf(newmark_controller, ['AY;MR' user_input ';GO;']);
@@ -101,6 +105,8 @@ function x_pos_new_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 global newmark_controller;
+fprintf(newmark_controller, 'AX;UF;');
+fprintf(newmark_controller, 'AX;UU25;');
 user_input = get(handles.input_distance,'String');
 user_input = int2str(round(str2double(user_input)));
 fprintf(newmark_controller, ['AX;MR' user_input ';GO;']);
@@ -113,6 +119,8 @@ function x_neg_new_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 global newmark_controller;
+fprintf(newmark_controller, 'AX;UF;');
+fprintf(newmark_controller, 'AX;UU25;');
 user_input = get(handles.input_distance,'String');
 user_input = int2str(round(str2double(user_input)));
 fprintf(newmark_controller, ['AX;MR-' user_input ';GO;']);

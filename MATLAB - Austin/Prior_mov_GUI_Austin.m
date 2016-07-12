@@ -79,10 +79,10 @@ function z_pos_prior_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 global prior_controller;
-fprintf(prior_controller, 'RES,s,1.0\r\n')
+fprintf(prior_controller, 'RES,s,1.0\r\n');
 user_input = get(handles.input_distance,'String');
 user_input = int2str(round(str2double(user_input)));
-fprintf(prior_controller, ['GR,0,0,' user_input '\r\n'])
+fprintf(prior_controller, ['GR,0,0,' user_input '\r\n']);
 disp(['GR,0,0,' user_input ')'])
 
 % --- Executes on button press in z_neg_prior.
@@ -91,10 +91,10 @@ function z_neg_prior_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 global prior_controller;
-fprintf(prior_controller, 'RES,s,1.0\r\n')
+fprintf(prior_controller, 'RES,s,1.0\r\n');
 user_input = get(handles.input_distance,'String');
 user_input = int2str(round(str2double(user_input)));
-fprintf(prior_controller, ['GR,0,0,-' user_input '\r\n'])
+fprintf(prior_controller, ['GR,0,0,-' user_input '\r\n']);
 disp(['GR,(0,0,-' user_input ')'])
 
 % --- Executes on button press in y_neg_prior.
@@ -103,10 +103,10 @@ function y_neg_prior_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 global prior_controller;
-fprintf(prior_controller, 'RES,s,1.0\r\n')
+fprintf(prior_controller, 'RES,s,1.0\r\n');
 user_input = get(handles.input_distance,'String');
 user_input = int2str(round(str2double(user_input)));
-fprintf(prior_controller, ['GR,0,-' user_input ',0\r\n'])
+fprintf(prior_controller, ['GR,0,-' user_input ',0\r\n']);
 disp(['GR,(0,-' user_input ',0)'])
 
 % --- Executes on button press in y_pos_prior.
@@ -115,11 +115,11 @@ function y_pos_prior_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 global prior_controller;
-fprintf(prior_controller, 'RES,s,1.0\r\n')
+fprintf(prior_controller, 'RES,s,1.0\r\n');
 user_input = get(handles.input_distance,'String');
 user_input = int2str(round(str2double(user_input)));
-fprintf(prior_controller, ['GR,0,' user_input ',0\r\n'])
-disp(['GR,(0,' user_input ',0)'])
+fprintf(prior_controller, ['GR,0,' user_input ',0\r\n']);
+disp(['GR,0,' user_input ',0'])
 
 % --- Executes on button press in x_pos_prior.
 function x_pos_prior_Callback(hObject, eventdata, handles)
@@ -127,10 +127,10 @@ function x_pos_prior_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 global prior_controller;
-fprintf(prior_controller, 'RES,s,1.0\r\n')
+fprintf(prior_controller, 'RES,s,1.0\r\n');
 user_input = get(handles.input_distance,'String');
 user_input = int2str(round(str2double(user_input)));
-fprintf(prior_controller, ['GR,' user_input ',0,0\r\n'])
+fprintf(prior_controller, ['GR,' user_input ',0,0\r\n']);
 disp(['GR,(' user_input ',0,0)'])
 
 % --- Executes on button press in x_neg_prior.
@@ -139,10 +139,10 @@ function x_neg_prior_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 global prior_controller;
-fprintf(prior_controller, 'RES,s,1.0\r\n')
+fprintf(prior_controller, 'RES,s,1.0\r\n');
 user_input = get(handles.input_distance,'String');
 user_input = int2str(round(str2double(user_input)));
-fprintf(prior_controller, ['GR,-' user_input ',0,0\r\n'])
+fprintf(prior_controller, ['GR,-' user_input ',0,0\r\n']);
 disp(['GR,(-' user_input ',0,0)'])
 
 
