@@ -75,12 +75,11 @@ varargout{1} = handles.output;
 
 % --- Executes on button press in z_pos_new.
 function z_pos_new_Callback(hObject, eventdata, handles)
-% hObject    handle to z_pos_new (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
+%%  Z+ BUTTON
+% Moves the stage in Z+ dir with units defined by...
 global newmark_controller
-fprintf(newmark_controller, 'AY;UF;');
-fprintf(newmark_controller, 'AY;UU25;');
+fprintf(newmark_controller, 'AY;UF;');  % what does this do?
+fprintf(newmark_controller, 'AY;UU25;');    % what does this do?
 user_input = get(handles.input_distance,'String');
 user_input = int2str(round(str2double(user_input))); 
 fprintf(newmark_controller, ['AY;MR-' user_input ';GO;']); 
@@ -147,9 +146,8 @@ end
 
 % --- Executes on button press in disconnect_from_controller.
 function disconnect_from_controller_Callback(hObject, eventdata, handles)
-% hObject    handle to disconnect_from_controller (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
+%% DISCONNECT SCOPE
+% --- Executes on button press in disconn_scope.
 global newmark_controller; 
 fclose(newmark_controller);
 display('Newmark Controller Disconnected');
