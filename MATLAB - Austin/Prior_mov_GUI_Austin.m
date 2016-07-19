@@ -75,6 +75,7 @@ varargout{1} = handles.output;
 
 % --- Executes on button press in z_pos_prior.
 function z_pos_prior_Callback(hObject, eventdata, handles)
+%%  Z+ BUTTON
 % hObject    handle to z_pos_prior (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
@@ -87,6 +88,7 @@ disp(['GR,0,0,' user_input ')'])
 
 % --- Executes on button press in z_neg_prior.
 function z_neg_prior_Callback(hObject, eventdata, handles)
+%%  Z- BUTTON
 % hObject    handle to z_neg_prior (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
@@ -99,6 +101,7 @@ disp(['GR,(0,0,-' user_input ')'])
 
 % --- Executes on button press in y_neg_prior.
 function y_neg_prior_Callback(hObject, eventdata, handles)
+%%  Y- BUTTON
 % hObject    handle to y_neg_prior (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
@@ -111,6 +114,7 @@ disp(['GR,(0,-' user_input ',0)'])
 
 % --- Executes on button press in y_pos_prior.
 function y_pos_prior_Callback(hObject, eventdata, handles)
+%% Y+ BUTTON
 % hObject    handle to y_pos_prior (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
@@ -123,6 +127,7 @@ disp(['GR,0,' user_input ',0'])
 
 % --- Executes on button press in x_pos_prior.
 function x_pos_prior_Callback(hObject, eventdata, handles)
+%%  X+ BUTTON
 % hObject    handle to x_pos_prior (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
@@ -135,6 +140,7 @@ disp(['GR,(' user_input ',0,0)'])
 
 % --- Executes on button press in x_neg_prior.
 function x_neg_prior_Callback(hObject, eventdata, handles)
+%%  X- BUTTON
 % hObject    handle to x_neg_prior (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
@@ -148,6 +154,8 @@ disp(['GR,(-' user_input ',0,0)'])
 
 % --- Executes on button press in connect_to_controller.
 function connect_to_controller_Callback(hObject, eventdata, handles)
+%% CONNECT SCOPE
+% Connects when conn_scop button pushed
 % hObject    handle to connect_to_controller (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
@@ -166,6 +174,8 @@ end
 
 % --- Executes on button press in disconnect_from_controller.
 function disconnect_from_controller_Callback(hObject, eventdata, handles)
+%% DISCONNECT SCOPE
+% Disconnects when disconn_scope button pushed
 % hObject    handle to disconnect_from_controller (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
@@ -181,7 +191,7 @@ function input_distance_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 input_distance = str2double(get(hObject,'String'));
-if isnan(input_distance) || ~isreal(input_distance)
+if isnan(input_distance) || ~isreal(input_distance) %If input is a real number - enable Z+,Z-,X+,X- buttons
     set(handles.z_pos_prior,'Enable','off')
     set(handles.z_neg_prior,'Enable','off')
     set(handles.y_neg_prior,'Enable','off')
@@ -190,7 +200,7 @@ if isnan(input_distance) || ~isreal(input_distance)
     set(handles.x_neg_prior,'Enable','off')
     uicontrol(hObject)
 else
-    set(handles.z_pos_prior,'Enable','on')
+    set(handles.z_pos_prior,'Enable','on')  %If input is not a real number - disable Z+,Z-,X+,X- buttons
     set(handles.z_neg_prior,'Enable','on')
     set(handles.y_neg_prior,'Enable','on')
     set(handles.y_pos_prior,'Enable','on')    

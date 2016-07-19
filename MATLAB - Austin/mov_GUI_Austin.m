@@ -75,6 +75,8 @@ varargout{1} = handles.output;
 
 % --- Executes on button press in connect_to_controller.
 function connect_to_controller_Callback(hObject, eventdata, handles)
+%% CONNECT SCOPE
+% Connect when connect_scope button pushed
 % hObject    handle to connect_to_controller (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
@@ -119,7 +121,7 @@ function input_distance_Callback(hObject, eventdata, handles)
 % Hints: get(hObject,'String') returns contents of input_distance as text
 %        str2double(get(hObject,'String')) returns contents of input_distance as a double
 input_distance = str2double(get(hObject,'String'));
-if isnan(input_distance) || ~isreal(input_distance)
+if isnan(input_distance) || ~isreal(input_distance) %If input is a real number - enable Z+,Z-,X+,X- buttons
     set(handles.z_pos,'Enable','off')
     set(handles.z_neg,'Enable','off')
     set(handles.y_neg,'Enable','off')
@@ -128,7 +130,7 @@ if isnan(input_distance) || ~isreal(input_distance)
     set(handles.x_neg,'Enable','off')
     uicontrol(hObject)
 else
-    set(handles.z_pos,'Enable','on')
+    set(handles.z_pos,'Enable','on')    %If input is not a real number - disable Z+,Z-,X+,X- buttons
     set(handles.z_neg,'Enable','on')
     set(handles.y_neg,'Enable','on')
     set(handles.y_pos,'Enable','on')    
@@ -151,6 +153,7 @@ end
 
 % --- Executes on button press in z_pos.
 function z_pos_Callback(hObject, eventdata, handles)
+%%  Z+ BUTTON
 % hObject    handle to z_pos (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
@@ -166,6 +169,7 @@ end
 
 % --- Executes on button press in y_neg.
 function y_neg_Callback(hObject, eventdata, handles)
+%% Y- BUTTON
 % hObject    handle to y_neg (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
@@ -186,6 +190,7 @@ end
 
 % --- Executes on button press in y_pos.
 function y_pos_Callback(hObject, eventdata, handles)
+%% Y+ BUTTON
 % hObject    handle to y_pos (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
@@ -207,6 +212,7 @@ end
 
 % --- Executes on button press in x_pos.
 function x_pos_Callback(hObject, eventdata, handles)
+%% X+ BUTTON
 % hObject    handle to x_pos (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
@@ -226,6 +232,7 @@ end
 
 % --- Executes on button press in x_neg.
 function x_neg_Callback(hObject, eventdata, handles)
+%% X- BUTTON
 % hObject    handle to x_neg (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
@@ -246,6 +253,7 @@ end
 
 % --- Executes on button press in z_neg.
 function z_neg_Callback(hObject, eventdata, handles)
+%% Z- BUTTON
 % hObject    handle to z_neg (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
@@ -260,6 +268,7 @@ elseif com_port == 'COM1'
 end
 % --- Executes on selection change in controller_select.
 function controller_select_Callback(hObject, eventdata, handles)
+%% SELECT SCOPE
 % hObject    handle to controller_select (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
