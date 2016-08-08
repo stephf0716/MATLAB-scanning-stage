@@ -9,7 +9,7 @@ if isempty(tek_scope)
     tek_scope = visa('TEK', 'USB0::0x0699::0x03A6::C013973::0::INSTR');
 else
     fclose(tek_scope);
-    tek_scope = tek_scope(1)
+    tek_scope = tek_scope(1);
 end
 
 % Connect to instrument object, tek_scope.

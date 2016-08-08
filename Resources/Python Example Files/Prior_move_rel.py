@@ -47,7 +47,7 @@ Prior.isOpen
 PriorInit()
 
 ## Move position
-moveRel('x',10000)
+moveRel('x',-1000)
 moveRel('y',0)
 
 # Close the serial connection to the Prior stage

@@ -45,7 +45,7 @@ NewmarkInit()
 ## Move position
 moveRel('z',0)
 # negative moves UP, positive moves DOWN
-moveRel('x',0)
+moveRel('x',-10000)
 # negative moves LEFT, positive moves RIGHT
 
 # Close the serial connection to the Newmark stage

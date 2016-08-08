@@ -54,7 +54,6 @@ function Prior_mov_GUI_Austin_OpeningFcn(hObject, eventdata, handles, varargin)
 
 % Choose default command line output for Prior_mov_GUI_Austin
 handles.output = hObject;
-
 % Update handles structure
 guidata(hObject, handles);
 
@@ -80,11 +79,13 @@ function z_pos_prior_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 global prior_controller;
-fprintf(prior_controller, 'RES,s,1.0\r\n');
-user_input = get(handles.input_distance,'String');
-user_input = int2str(round(str2double(user_input)));
-fprintf(prior_controller, ['GR,0,0,' user_input '\r\n']);
-disp(['GR,0,0,' user_input ')'])
+str1 = sprintf('RES,s,1.0\r\n'); %Sets units of movement to microns
+fwrite(prior_controller, str1); %Write to prior
+user_input = get(handles.input_distance,'String'); %Obtain input_distance
+user_input = round(str2double(user_input));
+str2 = sprintf('GR,0,0,%d\r\n',user_input); %GR - Go Relative - move function for prior
+fwrite(prior_controller, str2);  
+disp(str2) 
 
 % --- Executes on button press in z_neg_prior.
 function z_neg_prior_Callback(hObject, eventdata, handles)
@@ -93,24 +94,13 @@ function z_neg_prior_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 global prior_controller;
-fprintf(prior_controller, 'RES,s,1.0\r\n');
-user_input = get(handles.input_distance,'String');
-user_input = int2str(round(str2double(user_input)));
-fprintf(prior_controller, ['GR,0,0,-' user_input '\r\n']);
-disp(['GR,(0,0,-' user_input ')'])
-
-% --- Executes on button press in y_neg_prior.
-function y_neg_prior_Callback(hObject, eventdata, handles)
-%%  Y- BUTTON
-% hObject    handle to y_neg_prior (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-global prior_controller;
-fprintf(prior_controller, 'RES,s,1.0\r\n');
-user_input = get(handles.input_distance,'String');
-user_input = int2str(round(str2double(user_input)));
-fprintf(prior_controller, ['GR,0,-' user_input ',0\r\n']);
-disp(['GR,(0,-' user_input ',0)'])
+str1 = sprintf('RES,s,1.0\r\n'); %Sets units of movement to microns
+fwrite(prior_controller, str1); %Write to prior
+user_input = get(handles.input_distance,'String'); %Obtain input_distance
+user_input = round(str2double(user_input));
+str2 = sprintf('GR,0,0,-%d\r\n',user_input); %GR - Go Relative - move function for prior
+fwrite(prior_controller, str2);  
+disp(str2) 
 
 % --- Executes on button press in y_pos_prior.
 function y_pos_prior_Callback(hObject, eventdata, handles)
@@ -119,11 +109,28 @@ function y_pos_prior_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 global prior_controller;
-fprintf(prior_controller, 'RES,s,1.0\r\n');
-user_input = get(handles.input_distance,'String');
-user_input = int2str(round(str2double(user_input)));
-fprintf(prior_controller, ['GR,0,' user_input ',0\r\n']);
-disp(['GR,0,' user_input ',0'])
+str1 = sprintf('RES,s,1.0\r\n'); %Sets units of movement to microns
+fwrite(prior_controller, str1); %Write to prior
+user_input = get(handles.input_distance,'String'); %Obtain input_distance
+user_input = round(str2double(user_input));
+str2 = sprintf('GR,0,-%d,0\r\n',user_input); %GR - Go Relative - move function for prior
+fwrite(prior_controller, str2);  
+disp(str2) 
+
+% --- Executes on button press in y_neg_prior.
+function y_neg_prior_Callback(hObject, eventdata, handles)
+%%  Y- BUTTON
+% hObject    handle to y_neg_prior (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+global prior_controller;
+str1 = sprintf('RES,s,1.0\r\n'); %Sets units of movement to microns
+fwrite(prior_controller, str1); %Write to prior
+user_input = get(handles.input_distance,'String'); %Obtain input_distance
+user_input = round(str2double(user_input));
+str2 = sprintf('GR,0,%d,0\r\n',user_input); %GR - Go Relative - move function for prior
+fwrite(prior_controller, str2);  
+disp(str2) 
 
 % --- Executes on button press in x_pos_prior.
 function x_pos_prior_Callback(hObject, eventdata, handles)
@@ -132,11 +139,13 @@ function x_pos_prior_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 global prior_controller;
-fprintf(prior_controller, 'RES,s,1.0\r\n');
-user_input = get(handles.input_distance,'String');
-user_input = int2str(round(str2double(user_input)));
-fprintf(prior_controller, ['GR,' user_input ',0,0\r\n']);
-disp(['GR,(' user_input ',0,0)'])
+str1 = sprintf('RES,s,1.0\r\n'); %Sets units of movement to microns
+fwrite(prior_controller, str1); %Write to prior
+user_input = get(handles.input_distance,'String'); %Obtain input_distance
+user_input = round(str2double(user_input));
+str2 = sprintf('GR,%d,0,0\r\n',user_input); %GR - Go Relative - move function for prior
+fwrite(prior_controller, str2);  
+disp(str2) 
 
 % --- Executes on button press in x_neg_prior.
 function x_neg_prior_Callback(hObject, eventdata, handles)
@@ -145,11 +154,13 @@ function x_neg_prior_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 global prior_controller;
-fprintf(prior_controller, 'RES,s,1.0\r\n');
-user_input = get(handles.input_distance,'String');
-user_input = int2str(round(str2double(user_input)));
-fprintf(prior_controller, ['GR,-' user_input ',0,0\r\n']);
-disp(['GR,(-' user_input ',0,0)'])
+str1 = sprintf('RES,s,1.0\r\n'); %Sets units of movement to microns
+fwrite(prior_controller, str1); %Write to prior
+user_input = get(handles.input_distance,'String'); %Obtain input_distance
+user_input = round(str2double(user_input));
+str2 = sprintf('GR,-%d,0,0\r\n',user_input); %GR - Go Relative - move function for prior
+fwrite(prior_controller, str2);  
+disp(str2) 
 
 
 % --- Executes on button press in connect_to_controller.
@@ -191,7 +202,7 @@ function input_distance_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 input_distance = str2double(get(hObject,'String'));
-if isnan(input_distance) || ~isreal(input_distance) %If input is a real number - enable Z+,Z-,X+,X- buttons
+if isnan(input_distance) || ~isreal(input_distance) %If input is a real number - enable Z+,Z-,X+,X-,Y+,Y- buttons
     set(handles.z_pos_prior,'Enable','off')
     set(handles.z_neg_prior,'Enable','off')
     set(handles.y_neg_prior,'Enable','off')
@@ -200,7 +211,7 @@ if isnan(input_distance) || ~isreal(input_distance) %If input is a real number -
     set(handles.x_neg_prior,'Enable','off')
     uicontrol(hObject)
 else
-    set(handles.z_pos_prior,'Enable','on')  %If input is not a real number - disable Z+,Z-,X+,X- buttons
+    set(handles.z_pos_prior,'Enable','on')  %If input is not a real number - disable Z+,Z-,X+,X-,Y+,Y- buttons
     set(handles.z_neg_prior,'Enable','on')
     set(handles.y_neg_prior,'Enable','on')
     set(handles.y_pos_prior,'Enable','on')    
