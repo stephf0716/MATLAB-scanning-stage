@@ -22,7 +22,7 @@ function varargout = Automated_Scanning_V1(varargin)
 
 % Edit the above text to modify the response to help Automated_Scanning_V1
 
-% Last Modified by GUIDE v2.5 16-Aug-2016 10:13:09
+% Last Modified by GUIDE v2.5 16-Aug-2016 15:37:32
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -75,7 +75,6 @@ varargout{1} = handles.output;
 
 %% Oscilloscope Control Panel
 
-
 function input_file_name_Callback(hObject, eventdata, handles)
 % hObject    handle to input_file_name (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
@@ -83,7 +82,11 @@ function input_file_name_Callback(hObject, eventdata, handles)
 
 % Hints: get(hObject,'String') returns contents of input_file_name as text
 %        str2double(get(hObject,'String')) returns contents of input_file_name as a double
-handles.input_file_name = str2double((get(hObject,'String')));
+% Obtain handles for filename inputed in edit text
+handles.input_filename = (get(hObject,'String'));
+% Update handles function
+guidata(hObject,handles);
+
 % --- Executes during object creation, after setting all properties.
 function input_file_name_CreateFcn(hObject, eventdata, handles)
 % hObject    handle to input_file_name (see GCBO)
@@ -104,8 +107,10 @@ function save_waveform_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 % Interface configuration and instrument connection
 
-% The second argument to the VISA function is the resource string for your
-% instrument
+% Instrument control and data retreival
+% Now control the instrument using SCPI commands. refer to the instrument
+% programming manual for your instrument for the correct SCPI commands for
+% your instrument.
 visaObj = visa('agilent','USB0::0x2A8D::0x1768::MY55280409::0::INSTR');
 % Set the buffer size
 visaObj.InputBufferSize = 100000;
@@ -113,14 +118,10 @@ visaObj.InputBufferSize = 100000;
 visaObj.Timeout = 10;
 % Set the Byte order
 visaObj.ByteOrder = 'littleEndian';
+% Close Connection if already open
+fclose(visaObj);
 % Open the connection
 fopen(visaObj);
-
-% Instrument control and data retreival
-% Now control the instrument using SCPI commands. refer to the instrument
-% programming manual for your instrument for the correct SCPI commands for
-% your instrument.
-
 % Reset the instrument and stop 
 fprintf(visaObj,':STOP');
 % Specify data from Channel 1
@@ -205,17 +206,16 @@ waveform.XData = (waveform.XIncrement.*(1:length(waveform.RawData))) - waveform.
 waveform.YData = (waveform.YIncrement.*(waveform.RawData - waveform.YReference)) + waveform.YOrigin; 
 
 % Export data to new Excel File
-waveform.XData = waveform.XData.';
-filename = handles.input_file_name;
-xlswrite(filename, waveform.XData, 'B3:B1003');
-xlswrite(filename, waveform.YData, 'C3:C1003');
+waveform.XData = waveform.XData.'; % Fix waveform.XData to match waveform.YData
+filename = handles.input_filename;
+xlswrite(filename, waveform.XData, 'B3:B1003'); % Export time data to excel file
+xlswrite(filename, waveform.YData, 'C3:C1003'); % Export voltage data to excel file
 
 % Close Connection
 fclose(visaObj);
 
 % Delete objects and clear them.
 delete(visaObj); clear visaObj;
-
 
 %% Prior Control Panel
 
