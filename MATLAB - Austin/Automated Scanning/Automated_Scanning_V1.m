@@ -131,7 +131,7 @@ fprintf(visaObj,':TIMEBASE:MODE MAIN');
 % Set up acquisition type and count. 
 fprintf(visaObj,':ACQUIRE:TYPE NORMAL');
 fprintf(visaObj,':ACQUIRE:COUNT 1');
-% Specify 5000 points at a time by :WAV:DATA?
+% Specify 5000 points at a time by :WAV:DATA? <-- What's this? 
 fprintf(visaObj,':WAV:POINTS:MODE RAW');
 fprintf(visaObj,':WAV:POINTS 1000');
 % Now tell the instrument to digitize channel1
@@ -186,6 +186,7 @@ maxVal = 2^16;
 preambleBlock = regexp(preambleBlock,',','split');
 
 % store all this information into a waveform structure for later use
+% <-- what's this below block of code for? 
 waveform.Format = str2double(preambleBlock{1});     % This should be 1, since we're specifying INT16 output
 waveform.Type = str2double(preambleBlock{2});
 waveform.Points = str2double(preambleBlock{3});
